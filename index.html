@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>ES 6 Overview</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="Overview of the new features in Ecmascript 6">
+		<meta name="author" content="Z.Stoychev & V.Buhlev">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -40,8 +40,216 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-                <section>
+				<section>
+					<h1>ES 6 Overview</h1>
+					<h4>What's new and why we should be already using it</h4>
+					<p>
+						<small>By Zdravko and Ventsi</small>
+					</p>
+				</section>
 
+                <section>
+                    <section>
+                        <h2>let & const</h2>
+                        <pre><code data-trim>
+function getValue(condition) {
+    if (condition) {
+        let value = "blue";
+        // other code
+        return value;
+    } else {
+        // value doesn't exist here
+        return null;
+    }
+    // value doesn't exist here
+}
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>What is the problem here?</h2>
+                        <pre><code data-trim>
+var funcs = [];
+
+for (var i=0; i < 10; i++) {
+    funcs.push(function() { console.log(i); });
+}
+
+funcs.forEach(function(func) {
+    func();
+});
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>let in loops</h2>
+                        <pre><code data-trim>
+var funcs = [];
+
+for (let i=0; i < 10; i++) {
+    funcs.push(function() { console.log(i); });
+}
+
+funcs.forEach(function(func) {
+    func();     // outputs 0, then 1, then 2, up to 9
+})
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <pre><code data-trim>
+var message = "Hello!";
+let age = 25;
+
+// Each of these would cause an error given the previous declarations
+const message = "Goodbye!";
+const age = 30;
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Object Destructuring</h2>
+                    </section>
+
+                    <section>
+                        <pre><code data-trim>
+let options = {
+    repeat: true,
+    save: false,
+    rules: {
+        custom: 10,
+    }
+};
+
+let { repeat: localRepeat, save: localSave } = options;
+let { repeat, save, rules: { custom }} = options;
+
+// it works for real :)
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <pre><code data-trim>
+var colors = [ "red", [ "green", "lightgreen" ], "blue" ];
+
+// later
+
+var [ firstColor, [ secondColor ] ] = colors;
+
+console.log(firstColor);        // "red"
+console.log(secondColor);       // "green"
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <pre><code data-trim>
+var options = {
+        repeat: true,
+        save: false,
+        colors: [ "red", "green", "blue" ]
+    };
+
+var { repeat, save, colors: [ firstColor, secondColor ]} = options;
+
+console.log(repeat);            // true
+console.log(save);              // false
+console.log(firstColor);        // "red"
+console.log(secondColor);       // "green"
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>It even works for function arguments</h2>
+                        <pre><code data-trim>
+function setCookie({ secure, path, domain, expires } = {}) {
+    // there is something more happening here
+}
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Functions</h2>
+                    </section>
+
+                    <section>
+                        <h2>Default Parameters</h2>
+                        <h3>Before</h3>
+                        <pre><code data-trim>
+function makeRequest(url, timeout, callback) {
+
+    timeout = timeout || 2000;
+    callback = callback || function() {};
+
+    // the rest of the function
+}
+                        </code></pre>
+                        <h3>After</h3>
+                        <pre><code data-trim>
+function makeRequest(url, timeout=2000, callback=function() {}) {
+// the rest of the function }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Default Parameters</h2>
+                        <pre><code data-trim>
+function getCallback() {
+    return function() {
+        // some code
+    };
+}
+
+function makeRequest(url, timeout=2000, callback=getCallback()) {
+// the rest of the function }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Rest Parameters</h2>
+                        <pre><code data-trim>
+function sum(first, ...numbers) {
+    // some amaizing implementation
+}
+
+// Syntax error: Can't have a named parameter after rest parameters
+function sum(first, ...numbers, last) { }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Spread Operator</h2>
+                        <pre><code data-trim>
+let values = [25, 50, 75, 100]
+console.log(Math.max.apply(Math, values));  // 100
+
+console.log(Math.max(...values));           // 100
+console.log(Math.max(...values, 1000));     // 1000
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Block-Level Functions</h2>
+                        <pre><code data-trim>
+"use strict";
+
+if (true) {
+    console.log(typeof doSomething);        // "function"
+    function doSomething() { // ...  }
+    doSomething();
+}
+
+console.log(typeof doSomething);            // "undefined"
+
+if (true) {
+    console.log(typeof doSomething);        // throws error
+    let doSomething = function () { // ...  }
+}
+                        </code></pre>
+                    </section>
                 </section>
 
                 <section>
@@ -76,6 +284,146 @@ Paging.prototype.nextPage = function() {
         newItems => this.items.push(...newItems));
     });
 }</code></pre>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Object Literal Extensions</h2>
+                    </section>
+
+                    <section>
+                        <h3>Property Initializer Shorthand</h3>
+                        <pre class="fragment"><code class="javascript">
+function createPerson(name, age) {
+    return {
+        name: name,
+        age: age
+    };
+}
+                        </code></pre>
+                        <pre class="fragment"><code class="javascript">
+function createPerson(name, age) {
+    return { name, age };
+}
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Method Initializer Shorthand</h3>
+                        <pre><code class="javascript">
+var person = {
+    name: "Nicholas",
+    sayName: function() {
+        console.log(this.name);
+    }
+};
+                        </code></pre>
+                        <pre><code class="javascript">
+var person = {
+    name: "Nicholas",
+    sayName() {
+        console.log(this.name);
+    }
+};
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Computed Property Names</h3>
+                        <pre><code class="javascript">
+var suffix = " name";
+
+var person = {
+    ["first" + suffix]: "Nicholas",
+    ["last" + suffix]: "Zakas"
+};
+
+console.log(person["first name"]);      // "Nicholas"
+console.log(person["last name"]);       // "Zakas"
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Changing Prototypes (1)</h3>
+                        <pre><code class="javascript">
+let person = {
+    getGreeting() { return "Hello"; }
+};
+let dog = {
+    getGreeting() { return "Woof"; }
+};
+
+let friend = Object.create(person);
+console.log(friend.getGreeting());                      // "Hello"
+console.log(Object.getPrototypeOf(friend) === person);  // true
+
+Object.setPrototypeOf(friend, dog);
+console.log(friend.getGreeting());                      // "Woof"
+console.log(Object.getPrototypeOf(friend) === dog);     // true
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Changing Prototypes (2)</h3>
+                        <pre><code class="javascript">let person = {
+    getGreeting() { return "Hello"; }
+};
+let dog = {
+    getGreeting() { return "Woof"; }
+};
+
+let friend = {
+    __proto__: person
+};
+console.log(friend.getGreeting());                      // "Hello"
+console.log(friend.__proto__ === person);               // true
+
+friend.__proto__ = dog;
+console.log(friend.getGreeting());                      // "Woof"
+console.log(friend.__proto__ === dog);                  // true</code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Super References</h3>
+                        <pre><code class="javascript">let person = { getGreeting() { return "Hello"; } };
+let friend = {
+    __proto__: person,
+    getGreeting__ES5() {
+        // same as this.__proto__.getGreeting.call(this)
+        return Object.getPrototypeOf(this)
+            .getGreeting.call(this) + ", hi!";
+    },
+    getGreeting() {
+        return super.getGreeting() + ', hi!';
+    },
+    getGreeting() {
+        // if we are calling the same function
+        return super() + ', hi!';
+    }
+};</code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Classes</h3>
+                        <pre><code class="javascript">class Animal {
+    constructor(name) {
+        this.name = name;
+    },
+
+    get name() { return this.name; },
+    set name(value) { this.name = value; },
+
+    talk() { console.log(this.name); }
+}
+class Cat extends Animal {
+    static specialCatFactory() { return new Cat('Scumbag'); }
+    talk() {
+        console.log('Meow Meow Motherfucker');
+        super();
+    }
+}
+</code></pre>
+                    </section>
                 </section>
 
                 <section>
@@ -140,6 +488,7 @@ obj.toString(); // 'obj'</code></pre>
     );
 }</code></pre>
                 </section>
+
 
                 <section>
                     <h2>Iterators (1)</h2>
@@ -404,6 +753,20 @@ var gosho = new Person('Gosho');</code></pre>
                         <li>Reflect API</li>
                         <li>Better unicode support</li>
                         <li>Binary and octal literals — <code>0b10110011 === 179</code></li>
+                        <li>Promise, Map(weak), Set(weak)</li>
+                        <li>Object.assign</li>
+                        <li>Number isFinite, isNaN, parseInt, parseFloat, isInteger</li>
+                        <li>Lots of new Math methods</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>When will browsers implement this so that we can use it ?</h3>
+
+                    <ul class="fragment">
+                        <li>Babel.js(former 6to5)</li>
+                        <li>Google Traceur</li>
+                        <li>...</li>
                     </ul>
                 </section>
 
@@ -417,6 +780,11 @@ var gosho = new Person('Gosho');</code></pre>
                         <li>Macros</li>
                         <li>...</li>
                     </ul>
+                </section>
+
+                <section>
+                    <h4>There are no stupid questions just stupid answers ...</h4>
+                    <h4>???????????????????????</h4>
                 </section>
 			</div>
 
