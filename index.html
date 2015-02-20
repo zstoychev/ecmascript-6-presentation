@@ -40,338 +40,384 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
-				</section>
+                <section>
 
-				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
-				</section>
+                </section>
 
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
+                <section>
+                    <h2>Arrow functions (1)</h2>
+                    <pre class="fragment"><code class="javascript">let square = function(x) {
+    return x * x;
+}</code></pre>
+                    <pre class="fragment"><code class="javascript">let square = x => x * x;</code></pre>
+                    <pre class="fragment"><code class="javascript">[1, 2, 3, 4].map(x => x * x);</code></pre>
+                    <pre class="fragment"><code class="javascript">[1, 2, 3, 4].map((value, key) => value * key);</code></pre>
+                    <pre class="fragment"><code class="javascript">[1, 2, 3, 4].forEach(() => console.log('New array value'));</code></pre>
+                    <pre class="fragment"><code class="javascript">[1, 2, 3, 4].map((value, key) => {
+    console.log(`New array value ${value}`);
+    return value * key
+});</code></pre>
+                </section>
 
-				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
-				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-						</div>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code>Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
+                <section>
+                    <h2>Arrow functions (2)</h2>
+                    <pre class="fragment"><code class="javascript">function Paging(nextPageCallback) {
+    this.nextPageCallback = nextPageCallback;
+    this.items = []
 }
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
 
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
+Paging.prototype.nextPage = function() {
+    this.nextPageCallback().then(function(newItems) {
+        this.items.push(...newItems);
+    }.bind(this));
+}</code></pre>
+                    <pre class="fragment"><code class="javascript">Paging.prototype.nextPage = function() {
+    this.nextPageCallback().then(
+        newItems => this.items.push(...newItems));
+    });
+}</code></pre>
+                </section>
 
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
+                <section>
+                    <h2>Symbols — A New Primitive Type</h2>
+                    <pre><code class="javascript">let key1 = Symbol('key');
+let key2 = Symbol('key');
 
-				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							<tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							<tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							<tr>
-						</tbody>
-					</table>
-				</section>
+key1 == key2; // false
 
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
+let obj = {
+    [key1]: 2
+};
 
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
+obj[key2] = 3 + obj[key1];</code></pre>
+                </section>
 
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
+                <section>
+                    <h2>Why Symbols — Avoiding Name Clashes — Keeping Them Private</h2>
+                    <pre><code class="javascript">let hash = Symbol(); // don't share
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
+function calculateHashCode(obj) { ... }
 
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
+function hashCode(obj) {
+    if (!(hash in obj)) {
+        obj[hash] = calculateHashCode(obj);
+    }
 
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
+    return obj[hash];
+}</code></pre>
+                </section>
 
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
+                <section>
+                    <h2>Why Symbols — Avoiding Name Clashes — For Public Interface</h2>
+                    <pre><code class="javascript">let obj = {
+    [Symbol.toStringTag]() {
+        return 'obj';
+    }
+};
 
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
+obj.toString(); // 'obj'</code></pre>
 
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
+                    <ul class="fragment">
+                        <li><code>Symbol.iterator</code></li>
+                        <li><code>Symbol.toPrimitive</code></li>
+                        <li><code>Symbol.hasInstance </code></li>
+                    </ul>
+                </section>
 
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
-				</section>
+                <section>
+                    <h2>Why Symbols — Unique Constants (Typed Enums)</h2>
+                    <pre><code class="javascript">let Color = {
+    RED: Symbol(),
+    GREEN: Symbol(),
+    BLUE: Symbol(),
+    PURPLE: Symbol()
+}</code></pre>
+                    <p class="fragment">Old approach — using string value. They have the problem that they may clash accidentally</p>
+                    <pre class="fragment"><code class="javascript">function defineEnum(values) {
+    return values.reduce((obj, value) =>
+        Object.assign(obj, { [value]: Symbol() },
+        {}
+    );
+}</code></pre>
+                </section>
 
+                <section>
+                    <h2>Iterators (1)</h2>
+                    <p>An object with <code>next</code> function, which returns a <code>{&nbsp;value:&nbsp;...,&nbsp;isDone:&nbsp;...&nbsp;}</code> object, representing the next value in a sequence</p>
+                </section>
+
+                <section>
+                    <h2>Iterators (2)</h2>
+                    <pre><code class="javascript">function createFactorialIterator(n) {
+    let accumulator = 1;
+    let current = 1;
+    return {
+        next: function() {
+            if (current <= n) {
+                accumulator *= current;
+                current++;
+                return { value: accumulator, isDone: false };
+            } else {
+                return { value: undefined; isDone: true };
+            }
+        }
+    }
+}
+}</code></pre>
+                </section>
+
+                <section>
+                    <h2>Iterators (3)</h2>
+                    <pre><code class="javascript">let fact4 = createFactorialIterator(4);
+fact4.next(); // { value: 1, isDone: false }
+fact4.next(); // { value: 2, isDone: false }
+fact4.next(); // { value: 6, isDone: false }
+fact4.next(); // { value: 24, isDone: false }
+fact4.next(); // { value: undefined, isDone: true }
+fact4.next(); // { value: undefined, isDone: true }</code></pre>
+                </section>
+
+                <section>
+                    <h2>Iterables</h2>
+                    <p>An object with a key <code>Symbol.iterator</code> which returns an iterator</p>
+                    <pre><code class="javascript">function createFactorialSequence(n) {
+    return {
+        [Symbol.iterator]: createFactorialIterator.bind(null, n)
+    };
+}</code></pre>
+                    <p class="fragment">Such are arrays, strings, <code>Map</code>, <code>Set</code>, <code>NodeList</code>, some iterators, etc.</p>
+                </section>
+
+                <section>
+                    <h2>For ... of ...</h2>
+                    <pre class="fragment"><code class="javascript">let factSeq = createFactorialSequence(5);
+
+for (let number of factSeq) {
+    console.log(number);
+}</code></pre>
+                    <pre class="fragment"><code class="javascript">let people = [
+    { id: 2, firstName: 'Josho', lastName: 'Moshev' },
+    { id: 42, firstName: 'Pesho', lastName: 'Goshev' }
+];
+
+for (let {firstName, lastName} of people) {
+    console.log(`${firstName} ${lastName}`);
+}</code></pre>
+                </section>
+
+                <section>
+                    <h2>Generators (1)</h2>
+                    <pre><code class="javascript">function* simpleGenerator() {
+    yield 3;
+    yield 2;
+    yield 1;
+}
+
+var gen = simpleGenerator();
+console.log(gen.next()); // { value: 3, isDone: false }
+console.log(gen.next()); // { value: 2, isDone: false }
+console.log(gen.next()); // { value: 1, isDone: false }
+console.log(gen.next()); // { value: undefined, isDone: true }</code></pre>
+                    <pre class="fragment"><code class="javascript">for (let number of simpleGenerator()) {
+    console.log(number);
+}
+// 3
+// 2
+// 1</code></pre>
+                </section>
+
+                <section>
+                    <h2>Generators (2)</h2>
+                    <pre><code class="javascript">function* fibonacciGenerator() {
+    let [a, b] = [1, 1];
+    while (true) {
+        yield a;
+        console.log('Generating next fibonacci');
+        [a, b] = [b, a + b];
+    }
+}</code></pre>
+                    <pre><code class="javascript">let fibSeq = fibonacciGenerator();
+console.log(fibSeq.next());
+// { value: 1, isDone: false }
+console.log(fibSeq.next());
+// Generating next fibonacci
+// { value: 1, isDone: false }
+console.log(fibSeq.next());
+// Generating next fibonacci
+// { value: 2, isDone: false }</code></pre>
+                </section>
+
+                <section>
+                    <h2>Delegating Generators</h2>
+                    <pre><code class="javascript">function* complexGenerator() {
+    yield 'a';
+    yield* createFactorialSequence(3);
+    yield* 'Hi!'
+    yield 5;
+    yield* fibonacciGenerator();
+}</code></pre>
+                    <pre><code class="javascript">// a
+// 1
+// 2
+// 6
+// H
+// i
+// !
+// 5
+// 1
+// 1
+// 2
+// ...</code></pre>
+                </section>
+
+                <section>
+                    <h2>Deeper into Generators</h2>
+                    <pre><code class="javascript">function* communicativeGenerator() {
+    let response = yield 42;
+    response = yield response + 24
+    yield respone + 5;
+}
+
+var comGen = communicativeGenerator();
+let result1 = comGen.next();
+console.log(result1); // 42
+let result2 = comGene.next(result1);
+console.log(result2); // 66
+comGen.throw(new Error(":("));</code></pre>
+                </section>
+
+                <section>
+                    <h2>Generator - Let's Inverse the Control (1)</h2>
+                    <pre><code class="javascript">let sumPromise = spawn(function*() {
+    try {
+        let a = yield asyncRequest(url1);
+        let b = yield asyncRequest(url2);
+        let c = yield asyncRequest(url3);
+        let d = yield asyncRequest(url4, a + b + c);
+
+        return a + b + c + d;
+    } catch (e) {
+        return 42;
+    }
+});</code></pre>
+                </section>
+
+                <section>
+                    <h2>Generator - Let's Inverse the Control (2)</h2>
+                    <pre><code class="javascript">let sumPromise = spawn(function*() {
+    try {
+        let [a, b, c] = yield [url1, url2, url3].map(asyncRequest);
+        let d = yield asyncRequest(url4, a + b + c);
+
+        return a + b + c + d;
+    } catch (e) {
+        return 42;
+    }
+});</code></pre>
+                </section>
+
+                <section>
+                    <h2>Generator - Let's Inverse the Control (3)</h2>
+                    <pre><code class="javascript">let sumPromise = (async function() {
+    try {
+        let [a, b, c] = await [url1, url2, url3].map(asyncRequest);
+        let d = await asyncRequest(url4, a + b + c);
+
+        return a + b + c + d;
+    } catch (e) {
+        return 42;
+    }
+})();</code></pre>
+                </section>
+
+                <section>
+                    <h2>Modules (1)</h2>
+                    <ul>
+                        <li>Replacement for both CommonJS and AMD</li>
+                        <li>Simple syntax</li>
+                        <li>Both synchronous (on the server) and asynchronous (in the browser) module loading support</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Modules (2)</h2>
+                    <pre><code class="javascript">// lib/math.js
+let square = x => x * x;
+export square;
+
+export function sum(...elements) {
+    return elements.reduce((a, b) => a + b, 0);
+}
+
+export const sqrt = Math.sqrt;</code></pre>
+                    <pre class="fragment"><code class="javascript">// main.js
+import { sqrt as squareRoot, sum } from 'lib/math';
+
+sum([2, 3, 4, 5].map(squareRoot));</code></pre>
+                </section>
+
+                <section>
+                    <h2>Modules (3)</h2>
+                    <pre><code class="javascript">import * from 'lib/math';
+import * as math from 'lib/math';
+
+export * from 'lib/math';
+export { square as sqr, sum } from 'lib/math';
+
+const PI = 3.14;
+const E = 2.72;
+export { PI, E };</code></pre>
+                </section>
+
+                <section>
+                    <h2>Modules (4) - Default Exports</h2>
+                    <pre><code class="javascript">// model/Person.js
+export default class {
+    ...
+};
+
+// main.js
+import Person from 'model/Person';
+
+var gosho = new Person('Gosho');</code></pre>
+                </section>
+
+                <section>
+                    <h2>Modules (5)</h2>
+                    <ul>
+                        <li>Support for cyclic dependencies between modules</li>
+                        <li class="fragment">Static module structure</li>
+                        <li class="fragment">Dynamic loading is still supported:
+                            <pre><code class="javascript">System.import('module')
+    .then(module => ...)
+    .catch(error => ...);</code></pre>
+                        </li>
+                        <li class="fragment"><code>&lt;module&gt;</code> tag for browsers</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Other things</h2>
+                    <ul>
+                        <li>Tail recursion</li>
+                        <li>Proxies</li>
+                        <li>Reflect API</li>
+                        <li>Better unicode support</li>
+                        <li>Binary and octal literals — <code>0b10110011 === 179</code></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>The future - ES7 and beyond</h2>
+                    <ul>
+                        <li><code>Object.observe</code></li>
+                        <li><code>async</code> and <code>await</code></li>
+                        <li>Array/generator comprehensions</li>
+                        <li>Typed objects</li>
+                        <li>Macros</li>
+                        <li>...</li>
+                    </ul>
+                </section>
 			</div>
 
 		</div>
