@@ -492,7 +492,7 @@ obj.toString(); // 'obj'</code></pre>
 
                 <section>
                     <h2>Iterators (1)</h2>
-                    <p>An object with <code>next</code> function, which returns a <code>{&nbsp;value:&nbsp;...,&nbsp;isDone:&nbsp;...&nbsp;}</code> object, representing the next value in a sequence</p>
+                    <p>An object with <code>next</code> function, which returns a <code>{&nbsp;value:&nbsp;...,&nbsp;done:&nbsp;...&nbsp;}</code> object, representing the next value in a sequence</p>
                 </section>
 
                 <section>
@@ -505,25 +505,24 @@ obj.toString(); // 'obj'</code></pre>
             if (current <= n) {
                 accumulator *= current;
                 current++;
-                return { value: accumulator, isDone: false };
+                return { value: accumulator, done: false };
             } else {
-                return { value: undefined; isDone: true };
+                return { value: undefined, done: true };
             }
         }
     }
-}
 }</code></pre>
                 </section>
 
                 <section>
                     <h2>Iterators (3)</h2>
                     <pre><code class="javascript">let fact4 = createFactorialIterator(4);
-fact4.next(); // { value: 1, isDone: false }
-fact4.next(); // { value: 2, isDone: false }
-fact4.next(); // { value: 6, isDone: false }
-fact4.next(); // { value: 24, isDone: false }
-fact4.next(); // { value: undefined, isDone: true }
-fact4.next(); // { value: undefined, isDone: true }</code></pre>
+fact4.next(); // { value: 1, done: false }
+fact4.next(); // { value: 2, done: false }
+fact4.next(); // { value: 6, done: false }
+fact4.next(); // { value: 24, done: false }
+fact4.next(); // { value: undefined, done: true }
+fact4.next(); // { value: undefined, done: true }</code></pre>
                 </section>
 
                 <section>
@@ -534,7 +533,7 @@ fact4.next(); // { value: undefined, isDone: true }</code></pre>
         [Symbol.iterator]: createFactorialIterator.bind(null, n)
     };
 }</code></pre>
-                    <p class="fragment">Such are arrays, strings, <code>Map</code>, <code>Set</code>, <code>NodeList</code>, some iterators, etc.</p>
+                    <p class="fragment">Such are arrays, strings, <code>Map</code>, <code>Set</code>, <code>NodeList</code>, <code>coll.entries()</code>, <code>coll.keys()</code>, <code>coll.values()</code>, some iterators, etc.</p>
                 </section>
 
                 <section>
@@ -563,10 +562,10 @@ for (let {firstName, lastName} of people) {
 }
 
 var gen = simpleGenerator();
-console.log(gen.next()); // { value: 3, isDone: false }
-console.log(gen.next()); // { value: 2, isDone: false }
-console.log(gen.next()); // { value: 1, isDone: false }
-console.log(gen.next()); // { value: undefined, isDone: true }</code></pre>
+console.log(gen.next()); // { value: 3, done: false }
+console.log(gen.next()); // { value: 2, done: false }
+console.log(gen.next()); // { value: 1, done: false }
+console.log(gen.next()); // { value: undefined, done: true }</code></pre>
                     <pre class="fragment"><code class="javascript">for (let number of simpleGenerator()) {
     console.log(number);
 }
@@ -587,13 +586,13 @@ console.log(gen.next()); // { value: undefined, isDone: true }</code></pre>
 }</code></pre>
                     <pre><code class="javascript">let fibSeq = fibonacciGenerator();
 console.log(fibSeq.next());
-// { value: 1, isDone: false }
+// { value: 1, done: false }
 console.log(fibSeq.next());
 // Generating next fibonacci
-// { value: 1, isDone: false }
+// { value: 1, done: false }
 console.log(fibSeq.next());
 // Generating next fibonacci
-// { value: 2, isDone: false }</code></pre>
+// { value: 2, done: false }</code></pre>
                 </section>
 
                 <section>
@@ -620,7 +619,7 @@ console.log(fibSeq.next());
                 </section>
 
                 <section>
-                    <h2>Deeper into Generators</h2>
+                    <h2>Deeper into Generators (1)</h2>
                     <pre><code class="javascript">function* communicativeGenerator() {
     let response = yield 42;
     response = yield response + 24
@@ -629,14 +628,32 @@ console.log(fibSeq.next());
 
 var comGen = communicativeGenerator();
 let result1 = comGen.next();
-console.log(result1); // 42
-let result2 = comGene.next(result1);
-console.log(result2); // 66
+console.log(result1.value); // 42
+let result2 = comGen.next(result1.value);
+console.log(result2.value); // 66
 comGen.throw(new Error(":("));</code></pre>
                 </section>
 
                 <section>
-                    <h2>Generator - Let's Inverse the Control (1)</h2>
+                    <h2>Deeper into Generators (2)</h2>
+                    <pre><code class="javascript">function* simpleGeneratorWithAResult() {
+    yield 3;
+    yield 2;
+    yield 1;
+
+    return 4;
+}
+
+var gen = simpleGenerator2();
+console.log(gen.next()); // { value: 3, done: false }
+console.log(gen.next()); // { value: 2, done: false }
+console.log(gen.next()); // { value: 1, done: false }
+console.log(gen.next()); // { value: 4, done: true }
+console.log(gen.next()); // { value: undefined, done: true }</code></pre>
+                </section>
+
+                <section>
+                    <h2>Generators - Let’s Inverse the Control (1)</h2>
                     <pre><code class="javascript">let sumPromise = spawn(function*() {
     try {
         let a = yield asyncRequest(url1);
@@ -652,7 +669,7 @@ comGen.throw(new Error(":("));</code></pre>
                 </section>
 
                 <section>
-                    <h2>Generator - Let's Inverse the Control (2)</h2>
+                    <h2>Generators - Let’s Inverse the Control (2)</h2>
                     <pre><code class="javascript">let sumPromise = spawn(function*() {
     try {
         let [a, b, c] = yield [url1, url2, url3].map(asyncRequest);
@@ -666,7 +683,7 @@ comGen.throw(new Error(":("));</code></pre>
                 </section>
 
                 <section>
-                    <h2>Generator - Let's Inverse the Control (3)</h2>
+                    <h2>Generators - Let’s Inverse the Control (3)</h2>
                     <pre><code class="javascript">let sumPromise = (async function() {
     try {
         let [a, b, c] = await [url1, url2, url3].map(asyncRequest);
@@ -677,6 +694,20 @@ comGen.throw(new Error(":("));</code></pre>
         return 42;
     }
 })();</code></pre>
+                </section>
+
+                <section>
+                    <h2>Generators - Delegation with Return Value</h2>
+                    <pre><code>function* retrieveSum() { ... }
+
+function* doSomething(n) {
+    let sum = yield* retrieveSum();
+    let somethingElse = yield* somethingElse();
+
+    return (sum + somethingElse) * n;
+}
+
+spawn(doSomething, 4);</code></pre>
                 </section>
 
                 <section>
@@ -746,6 +777,60 @@ var gosho = new Person('Gosho');</code></pre>
                 </section>
 
                 <section>
+                    <h2>Template Strings (1)</h2>
+                    <pre><code class="javascript">let name = "Pesho &lt;strong&gt;Goshev&lt;strong&gt;";
+let address = "21 &amp; 53 Alabala Street &gt;&gt; Sofia"
+...
+
+let outputHtml = `&lt;div class="person ${someClass}"&gt;
+    &lt;div&gt;Name: ${name}&lt;/div&gt;
+    &lt;div&gt;Address: ${address}&lt;/div&gt;
+    ...
+&lt;/div&gt;`;</code></pre>
+                </section>
+
+                <section>
+                    <h2>Template Strings (2)</h2>
+                    <pre><code class="javascript">let name = "Pesho &lt;strong&gt;Goshev&lt;strong&gt;";
+let address = "21 &amp; 53 Alabala Street &gt;&gt; Sofia"
+...
+
+let outputHtml = safeHtml`&lt;div class="person ${someClass}"&gt;
+    &lt;div&gt;Name: ${name}&lt;/div&gt;
+    &lt;div&gt;Address: ${address}&lt;/div&gt;
+    ...
+&lt;/div&gt;`;</code></pre>
+                </section>
+
+                <section>
+                    <h2>Template Strings (3)</h2>
+                    <pre><code class="javascript">function safeHtml(strings, ...values) {
+    let sanatizedValues = values.map(escapeHtml);
+
+    let result = "";
+
+    for (let [index, string] of strings.entries()) {
+        result += string;
+        if (index < values.length) result += sanatizedValues[index];
+    }
+
+    return result;
+}</code></pre>
+                </section>
+
+                <section>
+                    <h2>Template Strings (4)</h2>
+                    <ul>
+                        <li><code>String.raw`\\\\n\t\a`</code></li>
+                        <li><code>format`$name%s is $height%2.2f meters tall`</code></li>
+                        <li><code>i18n`You have ${filesCount} files in ${directoriesCount} directories.`</code></li>
+                        <li><code>$`a.${className}[href=~'//${domain}/']`</code></li>
+                        <li>Extended multiline regular expressions</li>
+                        <li>All sorts of DSL handlers</li>
+                    </ul>
+                </section>
+
+                <section>
                     <h2>Other things</h2>
                     <ul>
                         <li>Tail recursion</li>
@@ -753,10 +838,8 @@ var gosho = new Person('Gosho');</code></pre>
                         <li>Reflect API</li>
                         <li>Better unicode support</li>
                         <li>Binary and octal literals — <code>0b10110011 === 179</code></li>
-                        <li>Promise, Map(weak), Set(weak)</li>
-                        <li>Object.assign</li>
-                        <li>Number isFinite, isNaN, parseInt, parseFloat, isInteger</li>
-                        <li>Lots of new Math methods</li>
+                        <li>Promise, Set, Map, WeakSet, WeakMap</li>
+                        <li>Many library improvements on Object, String, Number, Math and others</li>
                     </ul>
                 </section>
 
@@ -764,7 +847,7 @@ var gosho = new Person('Gosho');</code></pre>
                     <h3>When will browsers implement this so that we can use it ?</h3>
 
                     <ul class="fragment">
-                        <li>Babel.js(former 6to5)</li>
+                        <li>Babel.js (former 6to5)</li>
                         <li>Google Traceur</li>
                         <li>...</li>
                     </ul>
@@ -776,6 +859,7 @@ var gosho = new Person('Gosho');</code></pre>
                         <li><code>Object.observe</code></li>
                         <li><code>async</code> and <code>await</code></li>
                         <li>Array/generator comprehensions</li>
+                        <li>Async generators</li>
                         <li>Typed objects</li>
                         <li>Macros</li>
                         <li>...</li>
@@ -783,8 +867,7 @@ var gosho = new Person('Gosho');</code></pre>
                 </section>
 
                 <section>
-                    <h4>There are no stupid questions just stupid answers ...</h4>
-                    <h4>???????????????????????</h4>
+                    <h2>Questions?</h2>
                 </section>
 			</div>
 
